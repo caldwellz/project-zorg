@@ -19,4 +19,5 @@ requirejs(["logger"], function (logger) {
   var detailsDiv = document.getElementById("details-container");
 
   document.body.appendChild(logger.logbox);
+  logger.debugMode = true;
 });
