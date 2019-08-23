@@ -8,7 +8,6 @@ var logger = {};
 logger.messages = new Array();
 logger.logbox = document.createElement("div");
 logger.logbox.id = "logbox";
-//document.body.appendChild(logger.logbox);
 
 
 logger.clear = function () {
