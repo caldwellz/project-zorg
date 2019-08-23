@@ -1,0 +1,43 @@
+/* Tree Menu */
+.tree-menu {
+  position: relative;
+  left: 1.3rem;
+  width: calc(100% - 1.3rem);
+}
+
+.tree-menu ul {
+  display: none;
+  padding-left: 1.5rem;
+  margin: 0;
+  list-style: none;
+}
+
+.tree-menu label {
+  position: relative;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  background: #f8f8f8;
+  border: 2px solid #808080;
+  margin-bottom: 2px;
+}
+
+.tree-menu label::before {
+  content: "\25b6";
+  position: absolute;
+  top: 0;
+  left: -1.25rem;
+  transition: all 0.2s;
+}
+
+.tree-menu input[type=checkbox] {
+  display: none;
+}
+
+.tree-menu input:checked ~ ul {
+  display: block;
+}
+
+.tree-menu input:checked ~ label::before {
+  transform: rotate(90deg);
+}
