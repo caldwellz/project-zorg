@@ -8,7 +8,7 @@
   border-bottom: none;
 }
 
-#details-container > div {
+#details-container div {
   width: 100%;
   overflow: auto;
 }
@@ -42,9 +42,13 @@
   color: black;
 }
 
-#in-range {
+#current-stats {
   border-top: 2px solid black;
   border-bottom: 2px solid black;
+}
+
+#facing-stats {
+  border-top: 2px solid black;
 }
 
 @media only screen and (min-width: 30em) {
@@ -58,7 +62,7 @@
     height: 100%;
   }
 
-  #in-range {
+  #current-stats {
     border-top: none;
     border-bottom: none;
     border-left: 2px solid black;

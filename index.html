@@ -15,10 +15,6 @@
         <div class="center-text">Character</div>
         <ul>
           <li>
-            <a href="#char-stats">Stats</a>
-            <div class="hidden" id="char-stats"></div>
-          </li>
-          <li>
             <a href="#char-abilities">Abilities</a>
             <div class="hidden" id="char-abilities"></div>
           </li>
@@ -36,13 +32,14 @@
           </li>
         </ul>
       </div>
-      <div id="in-range">
-        <div class="center-text">Things in Range</div>
-        <ul></ul>
+      <div id="current-stats">
+        <div id="char-stats">
+          <div class="center-text">Current Stats - You</div>
+        </div>
+        <div class="hidden" id="facing-stats"></div>
       </div>
-      <div id="in-area">
-        <div class="center-text">Things in Area</div>
-        <ul></ul>
+      <div id="location">
+        <div class="center-text">Location</div>
       </div>
     </div>
     <div id="actions-container"></div>
