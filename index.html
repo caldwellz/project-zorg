@@ -5,10 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ubberon</title>
     <link href="styles/main.css" rel="stylesheet">
-    <link href="styles/tree-menu.css" rel="stylesheet">
+    <link href="styles/actions-container.css" rel="stylesheet">
+    <link href="styles/details-container.css" rel="stylesheet">
+    <link href="styles/logbox.css" rel="stylesheet">
   </head>
   <body>
-    <div id="details-container" />
+    <div id="actions-container">
+      <div id="character"><div class="center-text">Character</div></div>
+      <div id="in-range"><div class="center-text">Things in Range</div></div>
+      <div id="in-area"><div class="center-text">Things in Area</div></div>
+    </div>
+    <div id="details-container"></div>
     <script data-main="code/main.js" src="code/lib/require.js"></script>
   </body>
 </html>
