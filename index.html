@@ -11,8 +11,29 @@
   </head>
   <body>
     <div id="details-container">
+      <div id="char-stats">
+        <div class="center-text">You</div>
+        <ul>
+          <li style="list-style-type:'\2764';">HP: <span id="char-stat-health"></span></li>
+          <li style="list-style-type:'\269a';">Magic: <span id="char-stat-magic"></span></li>
+          <li style="list-style-type:'\1f5e1';">Weapon: <span id="char-stat-weapon"></span></li>
+          <li style="list-style-type:'\2694';">Base Attack: <span id="char-stat-attack"></span></li>
+          <li style="list-style-type:'\26e8';">Base Defense: <span id="char-stat-defense"></span></li>
+          <li style="list-style-type:'\2605';">Effects: <span id="char-stat-effects"></span></li>
+        </ul>
+      </div>
+      <div id="facing-stats">
+        <div class="center-text facing-name"></div>
+        <ul>
+          <li style="list-style-type:'\2764';">HP: <span id="facing-stat-health"></span></li>
+          <li style="list-style-type:'\1f5e1';">Weapon: <span id="facing-stat-weapon"></span></li>
+          <li style="list-style-type:'\2694';">Base Attack: <span id="facing-stat-attack"></span></li>
+          <li style="list-style-type:'\26e8';">Base Defense: <span id="facing-stat-defense"></span></li>
+          <li style="list-style-type:'\2605';">Effects: <span id="facing-stat-effects"></span></li>
+        </ul>
+      </div>
       <div id="character">
-        <div class="center-text">Character</div>
+        <div class="center-text">Character Details</div>
         <ul>
           <li>
             <a href="#char-abilities">Abilities</a>
@@ -30,16 +51,11 @@
             <a href="#char-journal">Journal</a>
             <div class="hidden" id="char-journal"></div>
           </li>
+          <li>
+            <a href="#char-locations">Locations</a>
+            <div class="hidden" id="char-locations"></div>
+          </li>
         </ul>
-      </div>
-      <div id="current-stats">
-        <div id="char-stats">
-          <div class="center-text">Current Stats - You</div>
-        </div>
-        <div class="hidden" id="facing-stats"></div>
-      </div>
-      <div id="location">
-        <div class="center-text">Location</div>
       </div>
     </div>
     <div id="actions-container">
