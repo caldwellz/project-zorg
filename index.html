@@ -14,8 +14,9 @@
       <div id="char-stats">
         <div class="center-text">You</div>
         <ul>
-          <li style="list-style-type:'\2764';">HP: <span id="char-stat-health"></span></li>
-          <li style="list-style-type:'\269a';">Magic: <span id="char-stat-magic"></span></li>
+          <li style="list-style-type:'\2764'; color:red;">HP: <span id="char-stat-health"></span></li>
+          <li style="list-style-type:'\269a'; color:blue;">MP: <span id="char-stat-magic"></span></li>
+          <li style="list-style-type:'\1f3ca'; color:green;">EP: <span id="char-stat-endurance"></span></li>
           <li style="list-style-type:'\1f5e1';">Weapon: <span id="char-stat-weapon"></span></li>
           <li style="list-style-type:'\2694';">Base Attack: <span id="char-stat-attack"></span></li>
           <li style="list-style-type:'\26e8';">Base Defense: <span id="char-stat-defense"></span></li>
@@ -25,7 +26,7 @@
       <div id="facing-stats">
         <div class="center-text facing-name"></div>
         <ul>
-          <li style="list-style-type:'\2764';">HP: <span id="facing-stat-health"></span></li>
+          <li style="list-style-type:'\2764'; color:red;">HP: <span id="facing-stat-health"></span></li>
           <li style="list-style-type:'\1f5e1';">Weapon: <span id="facing-stat-weapon"></span></li>
           <li style="list-style-type:'\2694';">Base Attack: <span id="facing-stat-attack"></span></li>
           <li style="list-style-type:'\26e8';">Base Defense: <span id="facing-stat-defense"></span></li>
@@ -35,6 +36,17 @@
       <div id="character">
         <div class="center-text">Character Details</div>
         <ul>
+          <li>
+            <a href="#char-impact">IMPACT</a>
+            <ul class="hidden" id="char-impact">
+              <li style="list-style-type:'\1f9e0';">Intelligence: <span id="impact-stat-int"></span></li>
+              <li style="list-style-type:'\1f5f2';">Magick: <span id="impact-stat-mag"></span></li>
+              <li style="list-style-type:'\1f441';">Perception: <span id="impact-stat-per"></span></li>
+              <li style="list-style-type:'\1f3c3';">Agility: <span id="impact-stat-agl"></span></li>
+              <li style="list-style-type:'\1f91d';">Charisma: <span id="impact-stat-cha"></span></li>
+              <li style="list-style-type:'\1f4aa';">Toughness: <span id="impact-stat-tgh"></span></li>
+            </ul>
+          </li>
           <li>
             <a href="#char-abilities">Abilities</a>
             <div class="hidden" id="char-abilities"></div>
