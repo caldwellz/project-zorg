@@ -8,3 +8,16 @@
   border-bottom: none;
   padding: 3px;
 }
+
+#movement button {
+  font-size: 1.25em;
+  width: 1em;
+  padding: 0;
+  line-height: 1;
+  background: none;
+  border: none;
+}
+
+#movement button:hover {
+  background: #dddddd;
+}
