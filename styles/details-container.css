@@ -22,7 +22,7 @@
   text-indent: 2px;
 }
 
-#details-container li.active {
+#details-container li.menu-active {
   list-style-type: "\25bd";
 }
 
@@ -36,14 +36,6 @@
 
 #details-container li a:hover {
   color: blue;
-}
-
-#details-container li.active a {
-  color: blue;
-}
-
-#details-container li.active a:hover {
-  color: black;
 }
 
 #facing-stats {

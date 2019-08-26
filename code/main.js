@@ -15,8 +15,8 @@ requirejs.config({
     }
 });
 
-requirejs(["logger"], function (logger) {
-  var detailsDiv = document.getElementById("details-container");
+requirejs(["logger", "MiscUtils"], function (logger, MiscUtils) {
+  MiscUtils.setClickActions();
 
   document.body.appendChild(logger.logbox);
   logger.debugMode = true;
