@@ -81,5 +81,36 @@ define([], function () {
     }
   };
 
+
+  MiscUtils.deepMerge = function (obj, mergeObj) {
+    // Make sure we're not trying to copy from an obj to a string or array, or other crazy things
+    if ((typeof obj === typeof mergeObj) && (obj instanceof Array === mergeObj instanceof Array)) {
+      for (var propName in mergeObj) {
+        if (mergeObj.hasOwnProperty(propName)) {
+          var prop = mergeObj[propName];
+
+          // Recurse for nested objects
+          if (typeof prop === "object") {
+            var subObj;
+            if (typeof obj[propName] === "object")
+              subObj = obj[propName];
+            else {
+              subObj = {}; // BUG/TODO: See if it would be better to create a full Object instead
+              obj[propName] = subObj;
+            }
+            deepMerge(subObj, prop);
+          }
+          else
+            obj[propName] = prop;
+        }
+      }
+    }
+    else {
+      logger.error("MiscUtils.deepMerge(): Parameter types mismatch");
+      logger.debug(obj);
+      logger.debug(mergeObj);
+    }
+  }
+
   return MiscUtils;
 });
