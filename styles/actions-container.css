@@ -8,7 +8,12 @@
   padding: 3px;
 }
 
-#movement button {
+#actions-container table {
+  display: inline-block;
+  margin: 0 0.5em 0 0.5em;
+}
+
+#actions-container table button {
   font-size: 1.25em;
   width: 1em;
   padding: 0;
@@ -17,6 +22,10 @@
   border: none;
 }
 
-#movement button:hover {
+#actions-container table button:hover {
   background: #dddddd;
+}
+
+#actions-container table td {
+  text-align: center;
 }
