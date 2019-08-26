@@ -15,8 +15,9 @@ requirejs.config({
     }
 });
 
-requirejs(["logger", "MiscUtils"], function (logger, MiscUtils) {
+requirejs(["logger", "MiscUtils", "BackendConnector_LocalStorage"], function (logger, MiscUtils, BackendConnector_LocalStorage) {
   MiscUtils.setClickActions();
+  var backend = new BackendConnector_LocalStorage();
 
   document.body.appendChild(logger.logbox);
   logger.debugMode = true;
