@@ -1,0 +1,18 @@
+{
+  "blueprints": {
+    "character": {
+      "name":"Character",
+      "type":"creature",
+      "impact": {
+        "int":1,
+        "mag":1,
+        "per":1,
+        "agi":1,
+        "cha":1,
+        "tgh":1,
+        "pointsRemaining":12
+      }
+    }
+  },
+  "currentArea":"start"
+}

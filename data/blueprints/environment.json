@@ -1,0 +1,16 @@
+{
+  "blueprints": {
+    "wall-stone": {
+      "name":"Wall (Stone)",
+      "type":"object",
+      "invulnerable":true
+    },
+    "pedestal-stone": {
+      "name":"Pedestal (Stone)",
+      "type":"object",
+      "impact": {
+        "tgh":10
+      }
+    }
+  }
+}
