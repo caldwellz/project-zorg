@@ -7,20 +7,21 @@
 define(["logger"], function (logger) {
 
   function BackendConnector(params) {
-    logger.debug("BackendConnector(): Creating an instance of dummy parent class");
-    return true;
+    params = params || {};
+    this.gameKey = params.gameKey || "game";
   };
 
   // Implementation overrides
-  BackendConnector.prototype.getEntities = function () {
-    logger.debug("BackendConnector.getEntities(): not implemented (dummy parent class)");
-    return [];
+  BackendConnector.prototype.fetchWorld = function (callback) {
+    logger.debug("BackendConnector.fetchWorld(): not implemented (dummy parent class)");
+    if (typeof callback === "function")
+      callback({});
   };
 
-  BackendConnector.prototype.playerAction = function (category, action, callback) {
-    logger.debug("BackendConnector.playerAction(): not implemented (dummy parent class)");
+  BackendConnector.prototype.submitAction = function (category, action, callback) {
+    logger.debug("BackendConnector.submitAction(): not implemented (dummy parent class)");
     if (typeof callback === "function")
-      callback([]);
+      callback({});
   };
 
   return BackendConnector;

@@ -4,23 +4,75 @@
 
 "use strict";
 
-define(["logger", "BackendConnector"], function (logger, BackendConnector) {
+define(["logger", "BackendConnector", "backend/dispatcher"], function (logger, BackendConnector, dispatcher) {
 
   function BackendConnector_LocalStorage(params) {
     BackendConnector.call(this, params);
-    return true;
+
+    // TODO: MDN has a handy LocalStorage API polyfill which could go here... But we may never target browsers old enough to need it anyway.
+    // However, stick to the storage API (setItem, getItem, etc.) instead of assignment operators just in case, and per MDN recommendation.
+
+    // Make sure storage API is usable
+    try {
+      var test = "_test";
+      window.localStorage.setItem(test, test);
+      window.localStorage.getItem(test);
+      window.localStorage.removeItem(test);
+      this.storage = window.localStorage;
+    }
+    catch (e) {
+      logger.error("BackendConnector_LocalStorage(): Storage API not usable");
+      logger.debug(e);
+      this.storage = null;
+    }
   };
   BackendConnector_LocalStorage.prototype = Object.create(BackendConnector.prototype);
   BackendConnector_LocalStorage.prototype.constructor = BackendConnector_LocalStorage;
 
 
-  BackendConnector_LocalStorage.prototype.getEntities = function () {
-    return [];
+  BackendConnector_LocalStorage.prototype.fetchWorld = function (callback) {
+    try {
+      this.world = this.world || JSON.parse(this.storage.getItem(this.gameKey));
+    }
+    catch (e) {
+      this.world = null;
+    }
+
+    if (this.world) {
+      dispatcher.world = this.world; // This connector just shares the world state with the backend, rather than having to synchronize
+      if (typeof callback === "function")
+        callback(this.world);
+    }
+    else {
+      dispatcher.newWorld(function (w) {
+        this.world = dispatcher.world; // Should be the same as the w arg, but just to be safe...
+        this.storage.setItem(this.gameKey, JSON.stringify(this.world));
+        logger.debug("BackendConnector_LocalStorage.fetchWorld(): Created and saved new world to localStorage key '" + this.gameKey + "'");
+        if (typeof callback === "function")
+          callback(this.world);
+      });
+    }
   };
 
-  BackendConnector_LocalStorage.prototype.playerAction = function (category, action, callback) {
-    if (typeof callback === "function")
-      callback([]);
+
+  BackendConnector_LocalStorage.prototype.submitAction = function (category, action, callback) {
+    if (this.world) {
+      var updates = dispatcher.submitAction(category, action);
+      // Don't need to merge changes first, because of the shared world
+      this.storage.setItem(this.gameKey, JSON.stringify(this.world));
+
+      if (typeof callback === "function")
+        callback(updates);
+    }
+    else {
+      var ctx = this;
+      this.fetchWorld(function () {
+        if (ctx.world)
+          ctx.submitAction(category, action, callback);
+        else
+          logger.error("BackendConnector_LocalStorage.submitAction(): World could not be found or fetched");
+      });
+    }
   };
 
   return BackendConnector_LocalStorage;
