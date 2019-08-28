@@ -4,7 +4,7 @@
 
 "use strict";
 
-define(["logger", "resource-loader", "miscutils"], function (logger, Loader, miscutils) {
+define(["logger", "resource-loader", "MiscUtils"], function (logger, Loader, MiscUtils) {
   var dispatcher = {};
   // TODO: Move files to an index list and load that first
   dispatcher.dataFiles = [
@@ -23,7 +23,7 @@ define(["logger", "resource-loader", "miscutils"], function (logger, Loader, mis
       for (var resName in resources) {
         var res = resources[resName];
         if (res.data && (res.xhrType === "json"))
-          miscutils.deepMerge(dispatcher.data, res.data);
+          MiscUtils.deepMerge(dispatcher.data, res.data);
         else
           logger.warn("dispatcher: Failed to load / parse data file '" + resName + "'");
       }
@@ -55,7 +55,7 @@ define(["logger", "resource-loader", "miscutils"], function (logger, Loader, mis
 
     if (dispatcher.data && dispatcher.data.blueprints[blueprintName]) {
       var e = {};
-      miscutils.deepMerge(e, dispatcher.data.blueprints[blueprintName]);
+      MiscUtils.deepMerge(e, dispatcher.data.blueprints[blueprintName]);
       dispatcher.world.entities[dispatcher.world.nextEntity] = e;
       e.blueprint = blueprintName;
       e.entity = dispatcher.world.nextEntity;

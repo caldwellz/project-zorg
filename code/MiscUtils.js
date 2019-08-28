@@ -5,17 +5,17 @@
 "use strict";
 
 define([], function () {
-  var miscutils = {};
+  var MiscUtils = {};
 
   // classList.contains polyfill for older browsers, courtesy of SO
   // https://stackoverflow.com/questions/5898656/check-if-an-element-contains-a-class-in-javascript
-  miscutils.hasClass = function (element, className) {
+  MiscUtils.hasClass = function (element, className) {
     return (' ' + element.className + ' ').indexOf(' ' + className+ ' ') > -1;
   };
 
 
   // classList.toggle polyfill for older browsers
-  miscutils.toggleClass = function (element, className) {
+  MiscUtils.toggleClass = function (element, className) {
     var index = (' ' + element.className + ' ').indexOf(' ' + className+ ' ');
     if (index > -1) {
       // Remove the class
@@ -35,30 +35,30 @@ define([], function () {
   };
 
 
-  miscutils.toggleSelectorClass = function (selector, className) {
+  MiscUtils.toggleSelectorClass = function (selector, className) {
     if ((typeof selector === "string") && (typeof className === "string")) {
       var query = document.querySelectorAll(selector);
       if (query.length <= 0) {
-        console.debug("miscutils.toggleSelectorClass(): selector query returned nothing");
+        console.debug("MiscUtils.toggleSelectorClass(): selector query returned nothing");
         console.debug(selector);
       }
       for (var i = 0; i < query.length; ++i)
-        miscutils.toggleClass(query[i], className);
+        MiscUtils.toggleClass(query[i], className);
     }
     else {
-      console.warn("miscutils.toggleSelectorClass(): selector or className not a string");
+      console.warn("MiscUtils.toggleSelectorClass(): selector or className not a string");
       console.debug(selector);
       console.debug(className);
     }
   };
 
 
-  miscutils.setClickActions = function () {
+  MiscUtils.setClickActions = function () {
     //action-toggle-class
     var query = document.querySelectorAll('[data-action-toggle-class]');
     for (var i = 0; i < query.length; ++i) {
       query[i].onclick = function () {
-        miscutils.toggleClass(this, this.getAttribute("data-action-toggle-class"));
+        MiscUtils.toggleClass(this, this.getAttribute("data-action-toggle-class"));
 
         // TODO: Use a data attrib or something else to flag whether to follow the link
         if (this.nodeName === 'A')
@@ -72,7 +72,7 @@ define([], function () {
       query[i].onclick = function () {
         // TODO: Support other nodes besides anchors
         if (this.nodeName === 'A') {
-          miscutils.toggleSelectorClass(this.getAttribute("href"), this.getAttribute("data-action-toggle-selector-class"));
+          MiscUtils.toggleSelectorClass(this.getAttribute("href"), this.getAttribute("data-action-toggle-selector-class"));
           
           // TODO: Use a data attrib or something else to flag whether to follow the link
           return false;
@@ -82,7 +82,7 @@ define([], function () {
   };
 
 
-  miscutils.deepMerge = function (obj, mergeObj) {
+  MiscUtils.deepMerge = function (obj, mergeObj) {
     // Make sure we're not trying to copy from an obj to a string or array, or other crazy things
     if ((typeof obj === typeof mergeObj) && (obj instanceof Array === mergeObj instanceof Array)) {
       for (var propName in mergeObj) {
@@ -101,7 +101,7 @@ define([], function () {
                 subObj = {}; // BUG/TODO: See if it would be better to create a full Object instead
               obj[propName] = subObj;
             }
-            miscutils.deepMerge(subObj, prop);
+            MiscUtils.deepMerge(subObj, prop);
           }
           else
             obj[propName] = prop;
@@ -109,11 +109,11 @@ define([], function () {
       }
     }
     else {
-      logger.error("miscutils.deepMerge(): Parameter types mismatch");
+      logger.error("MiscUtils.deepMerge(): Parameter types mismatch");
       logger.debug(obj);
       logger.debug(mergeObj);
     }
   }
 
-  return miscutils;
+  return MiscUtils;
 });
