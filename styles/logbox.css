@@ -8,11 +8,6 @@
   padding: 3px;
 }
 
-#logbox span {
-  font-family: monospace;
-  font-style: italic;
-}
-
 @media only screen and (min-width: 30em) {
   #logbox {
     height: 40vh;

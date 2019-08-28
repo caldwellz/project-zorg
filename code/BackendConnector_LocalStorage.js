@@ -44,12 +44,13 @@ define(["logger", "BackendConnector", "backend/dispatcher"], function (logger, B
         callback(this.world);
     }
     else {
+      var backend = this;
       dispatcher.newWorld(function (w) {
-        this.world = dispatcher.world; // Should be the same as the w arg, but just to be safe...
-        this.storage.setItem(this.gameKey, JSON.stringify(this.world));
-        logger.debug("BackendConnector_LocalStorage.fetchWorld(): Created and saved new world to localStorage key '" + this.gameKey + "'");
+        backend.world = dispatcher.world; // Should be the same as the w arg, but just to be safe...
+        backend.storage.setItem(backend.gameKey, JSON.stringify(backend.world));
+        logger.debug("BackendConnector_LocalStorage.fetchWorld(): Created and saved new world to localStorage key '" + backend.gameKey + "'");
         if (typeof callback === "function")
-          callback(this.world);
+          callback(backend.world);
       });
     }
   };

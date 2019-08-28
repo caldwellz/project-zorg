@@ -95,10 +95,13 @@ define([], function () {
             if (typeof obj[propName] === "object")
               subObj = obj[propName];
             else {
-              subObj = {}; // BUG/TODO: See if it would be better to create a full Object instead
+              if (prop instanceof Array)
+                subObj = [];
+              else
+                subObj = {}; // BUG/TODO: See if it would be better to create a full Object instead
               obj[propName] = subObj;
             }
-            deepMerge(subObj, prop);
+            miscutils.deepMerge(subObj, prop);
           }
           else
             obj[propName] = prop;
