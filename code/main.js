@@ -16,9 +16,13 @@ requirejs.config({
 });
 
 requirejs(["logger", "MiscUtils", "BackendConnector_LocalStorage"], function (logger, MiscUtils, BackendConnector_LocalStorage) {
-  MiscUtils.setClickActions();
-  var backend = new BackendConnector_LocalStorage();
-
   document.body.appendChild(logger.logbox);
   logger.debugMode = true;
+  MiscUtils.setClickActions();
+
+  var backend = new BackendConnector_LocalStorage();
+  backend.fetchWorld(function (w) {
+    var playerID = backend.newCharacter();
+    var player = w.entities[playerID];
+  });
 });
