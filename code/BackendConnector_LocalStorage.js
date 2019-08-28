@@ -40,8 +40,10 @@ define(["logger", "BackendConnector", "backend/dispatcher"], function (logger, B
 
     if (this.world) {
       dispatcher.world = this.world; // This connector just shares the world state with the backend, rather than having to synchronize
-      if (typeof callback === "function")
-        callback(this.world);
+      dispatcher._loadDataFiles(function () {
+        if (typeof callback === "function")
+          callback(dispatcher.world);
+      });
     }
     else {
       var backend = this;
@@ -58,8 +60,10 @@ define(["logger", "BackendConnector", "backend/dispatcher"], function (logger, B
 
   BackendConnector_LocalStorage.prototype.newCharacter = function () {
     var id = dispatcher.createEntityFromBlueprint("character");
-    if (id)
+    if (id) {
+      this.world.characterID = id;
       this.storage.setItem(this.gameKey, JSON.stringify(this.world));
+    }
 
     return id;
   };
