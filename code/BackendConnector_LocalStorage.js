@@ -56,6 +56,15 @@ define(["logger", "BackendConnector", "backend/dispatcher"], function (logger, B
   };
 
 
+  BackendConnector_LocalStorage.prototype.newCharacter = function () {
+    var id = dispatcher.createEntityFromBlueprint("character");
+    if (id)
+      this.storage.setItem(this.gameKey, JSON.stringify(this.world));
+
+    return id;
+  };
+
+
   BackendConnector_LocalStorage.prototype.submitAction = function (category, action, callback) {
     if (this.world) {
       var updates = dispatcher.submitAction(category, action);

@@ -18,6 +18,11 @@ define(["logger"], function (logger) {
       callback({});
   };
 
+  BackendConnector.prototype.newCharacter = function () {
+    logger.debug("BackendConnector.newCharacter(): not implemented (dummy parent class)");
+    return null;
+  };
+
   BackendConnector.prototype.submitAction = function (category, action, callback) {
     logger.debug("BackendConnector.submitAction(): not implemented (dummy parent class)");
     if (typeof callback === "function")
