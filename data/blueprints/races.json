@@ -1,0 +1,18 @@
+{
+  "blueprints": {
+    "human": {
+      "name":"Human",
+      "type":"creature",
+      "impact": {
+        "int":5,
+        "mag":0,
+        "per":5,
+        "agi":5,
+        "cha":5,
+        "tgh":5
+      },
+      "health":10,
+      "healthMultiplier":2
+    }
+  }
+}

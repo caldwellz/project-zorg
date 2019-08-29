@@ -10,6 +10,7 @@ define(["logger", "resource-loader", "MiscUtils"], function (logger, Loader, Mis
   dispatcher.dataFiles = [
     "data/newWorld.json",
     "data/areas/start.json",
+    "data/blueprints/races.json",
     "data/blueprints/creatures.json",
     "data/blueprints/placeables.json",
     "data/blueprints/environment.json"
@@ -53,9 +54,18 @@ define(["logger", "resource-loader", "MiscUtils"], function (logger, Loader, Mis
       return null;
     }
 
+    // Is it a valid blueprint name and do we have data?
     if (dispatcher.data && dispatcher.data.blueprints[blueprintName]) {
+      var blueprint = dispatcher.data.blueprints[blueprintName];
       var e = {};
-      MiscUtils.deepMerge(e, dispatcher.data.blueprints[blueprintName]);
+
+      // See if there's race data and copy that over first
+      var raceTemplate = dispatcher.data.blueprints[blueprint.race];
+      if (raceTemplate)
+        MiscUtils.deepMerge(e, raceTemplate);
+
+      // Copy any more specific blueprint data over the top and assign the entity
+      MiscUtils.deepMerge(e, blueprint);
       dispatcher.world.entities[dispatcher.world.nextEntity] = e;
       e.blueprint = blueprintName;
       e.entity = dispatcher.world.nextEntity;

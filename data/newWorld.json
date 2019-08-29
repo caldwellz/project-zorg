@@ -2,16 +2,17 @@
   "blueprints": {
     "character": {
       "name":"Character",
-      "type":"creature",
+      "race":"human",
       "impact": {
-        "int":1,
+        "int":3,
         "mag":1,
-        "per":1,
-        "agi":1,
-        "cha":1,
-        "tgh":1,
-        "pointsRemaining":12
-      }
+        "per":3,
+        "agi":3,
+        "cha":3,
+        "tgh":3,
+        "pointsRemaining":10
+      },
+      "health":6
     }
   },
   "startingArea":"start"
