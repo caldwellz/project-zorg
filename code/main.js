@@ -15,14 +15,13 @@ requirejs.config({
     }
 });
 
-requirejs(["logger", "MiscUtils", "BackendConnector_LocalStorage"], function (logger, MiscUtils, BackendConnector_LocalStorage) {
+requirejs(["logger", "MiscUtils", "BackendConnector_LocalStorage", "ViewController"], function (logger, MiscUtils, BackendConnector_LocalStorage, ViewController) {
   document.body.appendChild(logger.logbox);
   logger.debugMode = true;
   MiscUtils.setClickActions();
 
   var backend = new BackendConnector_LocalStorage();
   backend.fetchWorld(function (w) {
-    var playerID = backend.newCharacter();
-    var player = w.entities[playerID];
+    ViewController.initialize(w, backend);
   });
 });
