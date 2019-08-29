@@ -15,18 +15,20 @@ define([], function () {
 
 
   // classList.toggle polyfill for older browsers
-  MiscUtils.toggleClass = function (element, className) {
+  MiscUtils.toggleClass = function (element, className, state) {
     var index = (' ' + element.className + ' ').indexOf(' ' + className+ ' ');
     if (index > -1) {
-      // Remove the class
-      var endIndex = index + className.length;
-      var newList = "";
-      if (index > 0)
-        newList += element.className.slice(0, index);
-      newList += element.className.slice(endIndex);
-      element.className = newList.replace(/\s+/g, ' ').trim();
+      if (!state) {
+        // Remove the class
+        var endIndex = index + className.length;
+        var newList = "";
+        if (index > 0)
+          newList += element.className.slice(0, index);
+        newList += element.className.slice(endIndex);
+        element.className = newList.replace(/\s+/g, ' ').trim();
+      }
     }
-    else {
+    else if (state || (typeof state === "undefined")) {
       // Add the class
       if (element.className.length > 0)
         element.className += ' ';
@@ -35,7 +37,7 @@ define([], function () {
   };
 
 
-  MiscUtils.toggleSelectorClass = function (selector, className) {
+  MiscUtils.toggleSelectorClass = function (selector, className, state) {
     if ((typeof selector === "string") && (typeof className === "string")) {
       var query = document.querySelectorAll(selector);
       if (query.length <= 0) {
@@ -43,7 +45,7 @@ define([], function () {
         console.debug(selector);
       }
       for (var i = 0; i < query.length; ++i)
-        MiscUtils.toggleClass(query[i], className);
+        MiscUtils.toggleClass(query[i], className, state);
     }
     else {
       console.warn("MiscUtils.toggleSelectorClass(): selector or className not a string");
