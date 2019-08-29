@@ -47,21 +47,20 @@ define(["logger"], function (logger) {
 
     // IMPACT stats
     if (delta.impact) {
-      if (delta.impact.int)
-        _updateElem("impact-stat-int", delta.impact.int);
-      if (delta.impact.mag)
-        _updateElem("impact-stat-mag", delta.impact.mag);
-      if (delta.impact.per)
-        _updateElem("impact-stat-per", delta.impact.per);
-      if (delta.impact.agi)
-        _updateElem("impact-stat-agi", delta.impact.agi);
-      if (delta.impact.cha)
-        _updateElem("impact-stat-cha", delta.impact.cha);
-      if (delta.impact.tgh)
-        _updateElem("impact-stat-tgh", delta.impact.tgh);
-      if (delta.impact.pointsRemaining)
-        _updateElem("impact-stat-pointsRemaining", delta.impact.pointsRemaining);
+      _updateElem("impact-stat-int", ViewController.character.impact.int);
+      _updateElem("impact-stat-mag", ViewController.character.impact.mag);
+      _updateElem("impact-stat-per", ViewController.character.impact.per);
+      _updateElem("impact-stat-agi", ViewController.character.impact.agi);
+      _updateElem("impact-stat-cha", ViewController.character.impact.cha);
+      _updateElem("impact-stat-tgh", ViewController.character.impact.tgh);
+      var healthMult = ViewController.character.healthMultiplier || 1;
+      _updateElem("char-stat-totalhealth", ViewController.character.impact.tgh * healthMult);
+      _updateElem("impact-stat-pointsRemaining", ViewController.character.impact.pointsRemaining);
     }
+
+    // Current stats
+    if (typeof delta.health === "number")
+      _updateElem("char-stat-health", delta.health);
   };
 
   return ViewController;
