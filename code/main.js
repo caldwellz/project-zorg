@@ -21,6 +21,7 @@ requirejs(["logger", "MiscUtils", "BackendConnector_LocalStorage", "ViewControll
   MiscUtils.setClickActions();
 
   var backend = new BackendConnector_LocalStorage();
+  document.getElementById("new-game").onclick = function () { backend.newGame() };
   backend.fetchWorld(function (w) {
     ViewController.initialize(w, backend);
   });

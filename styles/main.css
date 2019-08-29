@@ -16,3 +16,10 @@ body {
 .hidden {
   display: none;
 }
+
+.menu-separator {
+  list-style-type: none;
+  width: 95%;
+  border: 1px solid black;
+  margin: 2px;
+}

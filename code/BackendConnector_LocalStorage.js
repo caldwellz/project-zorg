@@ -58,6 +58,18 @@ define(["logger", "BackendConnector", "backend/dispatcher"], function (logger, B
   };
 
 
+  BackendConnector_LocalStorage.prototype.newGame = function (callback) {
+    var backend = this;
+    delete backend.world;
+    backend.storage.removeItem(backend.gameKey);
+    backend.fetchWorld(function (w) {
+      require("ViewController").initialize(w, backend);
+      if (typeof callback === "function")
+        callback(w);
+    });
+  };
+
+
   BackendConnector_LocalStorage.prototype.newCharacter = function () {
     var id = dispatcher.createEntityFromBlueprint("character");
     if (id) {
