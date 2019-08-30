@@ -20,9 +20,9 @@ requirejs(["logger", "MiscUtils", "BackendConnector_LocalStorage", "ViewControll
   logger.debugMode = true;
   MiscUtils.setClickActions();
 
-  var backend = new BackendConnector_LocalStorage();
-  document.getElementById("new-game").onclick = function () { backend.newGame() };
-  backend.fetchWorld(function (w) {
-    ViewController.initialize(w, backend);
+  var connector = new BackendConnector_LocalStorage();
+  document.getElementById("new-game").onclick = function () { connector.newGame() };
+  connector.fetchWorld(function (w) {
+    ViewController.initialize(w, connector);
   });
 });

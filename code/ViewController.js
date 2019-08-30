@@ -8,12 +8,12 @@ define(["logger", "MiscUtils"], function (logger, MiscUtils) {
   var ViewController = {};
 
 
-  ViewController.initialize = function (world, backend) {
-    ViewController.backend = backend;
+  ViewController.initialize = function (world, connector) {
+    ViewController.connector = connector;
     ViewController.world = world;
 
     // Create and/or link the character object
-    var playerID = world.characterID || backend.newCharacter();
+    var playerID = world.characterID || connector.newCharacter();
     ViewController.character = world.entities[playerID];
 
     // Perform an initial update of everything

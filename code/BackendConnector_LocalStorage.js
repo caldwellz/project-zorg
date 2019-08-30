@@ -4,7 +4,7 @@
 
 "use strict";
 
-define(["logger", "BackendConnector", "backend/dispatcher"], function (logger, BackendConnector, dispatcher) {
+define(["logger", "BackendConnector", "backend/backend"], function (logger, BackendConnector, backend) {
 
   function BackendConnector_LocalStorage(params) {
     BackendConnector.call(this, params);
@@ -39,30 +39,30 @@ define(["logger", "BackendConnector", "backend/dispatcher"], function (logger, B
     }
 
     if (this.world) {
-      dispatcher.world = this.world; // This connector just shares the world state with the backend, rather than having to synchronize
-      dispatcher._loadDataFiles(function () {
+      backend.world = this.world; // This connector just shares the world state with the connector, rather than having to synchronize
+      backend._loadDataFiles(function () {
         if (typeof callback === "function")
-          callback(dispatcher.world);
+          callback(backend.world);
       });
     }
     else {
-      var backend = this;
-      dispatcher.newWorld(function (w) {
-        backend.world = dispatcher.world; // Should be the same as the w arg, but just to be safe...
+      var connector = this;
+      backend.newWorld(function (w) {
+        connector.world = backend.world; // Should be the same as the w arg, but just to be safe...
         // Get the starting area
-        if (dispatcher.data.startingArea) {
-          dispatcher.loadArea(dispatcher.data.startingArea, function (area) {
-            backend.world.currentArea = area;
-            backend.storage.setItem(backend.gameKey, JSON.stringify(backend.world));
-            logger.debug("BackendConnector_LocalStorage.fetchWorld(): Created and saved new world to localStorage key '" + backend.gameKey + "'");
+        if (backend.data.startingArea) {
+          backend.loadArea(backend.data.startingArea, function (area) {
+            connector.world.currentArea = area;
+            connector.storage.setItem(connector.gameKey, JSON.stringify(connector.world));
+            logger.debug("BackendConnector_LocalStorage.fetchWorld(): Created and saved new world to localStorage key '" + connector.gameKey + "'");
             if (typeof callback === "function")
-              callback(dispatcher.world);
+              callback(backend.world);
           });
         }
         else {
           logger.warn("BackendConnector_LocalStorage.fetchWorld(): No starting area found while creating world");
           if (typeof callback === "function")
-            callback(backend.world);
+            callback(connector.world);
         }
       });
     }
@@ -70,11 +70,11 @@ define(["logger", "BackendConnector", "backend/dispatcher"], function (logger, B
 
 
   BackendConnector_LocalStorage.prototype.newGame = function (callback) {
-    var backend = this;
-    delete backend.world;
-    backend.storage.removeItem(backend.gameKey);
-    backend.fetchWorld(function (w) {
-      require("ViewController").initialize(w, backend);
+    var connector = this;
+    delete connector.world;
+    connector.storage.removeItem(connector.gameKey);
+    connector.fetchWorld(function (w) {
+      require("ViewController").initialize(w, connector);
       if (typeof callback === "function")
         callback(w);
     });
@@ -82,7 +82,7 @@ define(["logger", "BackendConnector", "backend/dispatcher"], function (logger, B
 
 
   BackendConnector_LocalStorage.prototype.newCharacter = function () {
-    var id = dispatcher.createEntityFromBlueprint("character");
+    var id = backend.createEntityFromBlueprint("character");
     if (id) {
       this.world.characterID = id;
       this.storage.setItem(this.gameKey, JSON.stringify(this.world));
@@ -94,7 +94,7 @@ define(["logger", "BackendConnector", "backend/dispatcher"], function (logger, B
 
   BackendConnector_LocalStorage.prototype.submitAction = function (category, action, callback) {
     if (this.world) {
-      var updates = dispatcher.submitAction(category, action);
+      var updates = backend.submitAction(category, action);
       // Don't need to merge changes first, because of the shared world
       this.storage.setItem(this.gameKey, JSON.stringify(this.world));
 
