@@ -13,6 +13,10 @@ body {
   text-align: center;
 }
 
+.bold-text {
+ font-weight: bold;
+}
+
 .hidden {
   display: none;
 }
@@ -22,4 +26,17 @@ body {
   width: 95%;
   border: 1px solid black;
   margin: 2px;
+}
+
+table button {
+  font-size: 1.25em;
+  width: 1em;
+  padding: 0;
+  line-height: 1;
+  background: none;
+  border: none;
+}
+
+table button:hover {
+  background: #dddddd;
 }

@@ -4,7 +4,7 @@
 
 "use strict";
 
-define(["logger"], function (logger) {
+define(["logger", "MiscUtils"], function (logger, MiscUtils) {
   var ViewController = {};
 
 
@@ -56,6 +56,16 @@ define(["logger"], function (logger) {
       var healthMult = ViewController.character.healthMultiplier || 1;
       _updateElem("char-stat-totalhealth", ViewController.character.impact.tgh * healthMult);
       _updateElem("impact-stat-pointsRemaining", ViewController.character.impact.pointsRemaining);
+
+      // IMPACT points distribution
+      if (ViewController.character.impact.pointsRemaining) {
+        document.getElementById("impact-stat-pointsRemaining").style.color = "#118811";
+        MiscUtils.toggleSelectorClass(".button-impact-increase", "hidden", false);
+      }
+      else {
+        document.getElementById("impact-stat-pointsRemaining").style.color = "red";
+        MiscUtils.toggleSelectorClass(".button-impact-increase", "hidden", true);
+      }
     }
 
     // Current stats

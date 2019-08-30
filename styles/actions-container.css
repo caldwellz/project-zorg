@@ -13,19 +13,6 @@
   margin: 0 0.5em 0 0.5em;
 }
 
-#actions-container table button {
-  font-size: 1.25em;
-  width: 1em;
-  padding: 0;
-  line-height: 1;
-  background: none;
-  border: none;
-}
-
-#actions-container table button:hover {
-  background: #dddddd;
-}
-
 #actions-container table td {
   text-align: center;
 }
