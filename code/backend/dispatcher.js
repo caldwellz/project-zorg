@@ -6,10 +6,10 @@
 
 define(["logger", "resource-loader", "MiscUtils"], function (logger, Loader, MiscUtils) {
   var dispatcher = {};
+  dispatcher.areaBasePath = "data/areas/";
   // TODO: Move files to an index list and load that first
   dispatcher.dataFiles = [
     "data/newWorld.json",
-    "data/areas/start.json",
     "data/blueprints/races.json",
     "data/blueprints/creatures.json",
     "data/blueprints/placeables.json",
@@ -38,10 +38,9 @@ define(["logger", "resource-loader", "MiscUtils"], function (logger, Loader, Mis
     if (dispatcher.data) {
       dispatcher.world = {};
       dispatcher.world.entities = [];
-      dispatcher.world.nextEntity = 1;
-
+      dispatcher.world._nextEntity = 1;
       if (typeof callback === "function")
-          callback(dispatcher.world);
+        callback(dispatcher.world);
     }
     else
       dispatcher._loadDataFiles(dispatcher.newWorld, callback);
@@ -66,12 +65,12 @@ define(["logger", "resource-loader", "MiscUtils"], function (logger, Loader, Mis
 
       // Copy any more specific blueprint data over the top and assign the entity
       MiscUtils.deepMerge(e, blueprint);
-      dispatcher.world.entities[dispatcher.world.nextEntity] = e;
+      dispatcher.world.entities[dispatcher.world._nextEntity] = e;
       e.blueprint = blueprintName;
-      e.entity = dispatcher.world.nextEntity;
-      ++dispatcher.world.nextEntity;
+      e.entityID = dispatcher.world._nextEntity;
+      ++dispatcher.world._nextEntity;
 
-      return e.entity;
+      return e.entityID;
     }
     else {
       console.log(dispatcher.world);
@@ -85,6 +84,69 @@ define(["logger", "resource-loader", "MiscUtils"], function (logger, Loader, Mis
       }
       return null;
     }
+  };
+
+
+  dispatcher.loadArea = function (name, callback) {
+    if (!dispatcher.world) {
+      logger.warn("dispatcher.loadArea(): Invalid world (please create or load one first)");
+      return null;
+    }
+
+    // Determine URL
+    var basePath = dispatcher.areaBasePath || "";
+    var fn = basePath + name;
+    if (!name.endsWith(".json"))
+      fn += ".json";
+
+    // Load!
+    // TODO: Support loading a list of areas?
+    var ld = new Loader();
+    ld.add(fn).load(function (loader, resources) {
+      dispatcher.world.areas = dispatcher.world.areas || {};
+      for (var resName in resources) {
+        var res = resources[resName];
+        if (res.data && res.data.areas) {
+          // Fill in additional area properties
+          for (var areaTag in res.data.areas) {
+            var area = res.data.areas[areaTag];
+            area.tag = areaTag;
+            area.map = area.map || [];
+
+            // Convert entity locations list to actual entities and map data
+            for (var blueprintName in area.entityLocations) {
+              for (var i = 0; i < area.entityLocations[blueprintName].length; ++i) {
+                var eID = dispatcher.createEntityFromBlueprint(blueprintName);
+                if (eID) {
+                  var entity = dispatcher.world.entities[eID];
+                  var positionData = area.entityLocations[blueprintName][i];
+                  entity.direction = positionData[0];
+                  var x = positionData[1];
+                  var y = positionData[2];
+
+                  area.map[x] = area.map[x] || [];
+                  area.map[x][y] = area.map[x][y] || [];
+                  area.map[x][y].push(eID);
+                }
+              }
+            }
+
+            // Don't need the initial compacted location data anymore
+            delete area.entityLocations;
+
+            // Just keep the modified area objects instead of deepmerging
+            dispatcher.world.areas[areaTag] = area;
+            logger.debug("dispatcher.loadArea(): Area '" + areaTag + "' loaded.");
+
+            // Feed each area to the callback
+            if (typeof callback === "function")
+              callback(area);
+          }
+        }
+        else
+          logger.warn("dispatcher.loadArea(): Failed to load / parse area file '" + resName + "'");
+      }
+    });
   };
 
 

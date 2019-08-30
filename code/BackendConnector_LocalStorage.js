@@ -49,10 +49,21 @@ define(["logger", "BackendConnector", "backend/dispatcher"], function (logger, B
       var backend = this;
       dispatcher.newWorld(function (w) {
         backend.world = dispatcher.world; // Should be the same as the w arg, but just to be safe...
-        backend.storage.setItem(backend.gameKey, JSON.stringify(backend.world));
-        logger.debug("BackendConnector_LocalStorage.fetchWorld(): Created and saved new world to localStorage key '" + backend.gameKey + "'");
-        if (typeof callback === "function")
-          callback(backend.world);
+        // Get the starting area
+        if (dispatcher.data.startingArea) {
+          dispatcher.loadArea(dispatcher.data.startingArea, function (area) {
+            backend.world.currentArea = area;
+            backend.storage.setItem(backend.gameKey, JSON.stringify(backend.world));
+            logger.debug("BackendConnector_LocalStorage.fetchWorld(): Created and saved new world to localStorage key '" + backend.gameKey + "'");
+            if (typeof callback === "function")
+              callback(dispatcher.world);
+          });
+        }
+        else {
+          logger.warn("BackendConnector_LocalStorage.fetchWorld(): No starting area found while creating world");
+          if (typeof callback === "function")
+            callback(backend.world);
+        }
       });
     }
   };
