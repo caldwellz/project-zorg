@@ -11,8 +11,9 @@
         "cha":5,
         "tgh":5
       },
-      "health":10,
-      "healthMultiplier":2
+      "healthMultiplier":2,
+      "kronMultiplier":2,
+      "enduranceMultiplier":3
     }
   }
 }

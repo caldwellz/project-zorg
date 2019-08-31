@@ -76,6 +76,10 @@ define(["logger", "MiscUtils"], function (logger, MiscUtils) {
       _updateElem("impact-stat-tgh", ViewController.character.impact.tgh);
       var healthMult = ViewController.character.healthMultiplier || 1;
       _updateElem("char-stat-totalhealth", ViewController.character.impact.tgh * healthMult);
+      var kronMult = ViewController.character.kronMultiplier || 1;
+      _updateElem("char-stat-totalkron", ViewController.character.impact.mag * kronMult);
+      var enduranceMult = ViewController.character.enduranceMultiplier || 1;
+      _updateElem("char-stat-totalendurance", ViewController.character.impact.tgh * enduranceMult);
       _updateElem("impact-stat-pointsRemaining", ViewController.character.impact.pointsRemaining);
 
       // IMPACT points distribution
@@ -92,6 +96,10 @@ define(["logger", "MiscUtils"], function (logger, MiscUtils) {
     // Current stats
     if (typeof delta.health === "number")
       _updateElem("char-stat-health", delta.health);
+    if (typeof delta.kron === "number")
+      _updateElem("char-stat-kron", delta.kron);
+    if (typeof delta.endurance === "number")
+      _updateElem("char-stat-endurance", delta.endurance);
   };
 
   return ViewController;

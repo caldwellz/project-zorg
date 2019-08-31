@@ -63,8 +63,17 @@ define(["logger", "resource-loader", "MiscUtils", "./actionDispatcher"], functio
       if (raceTemplate)
         MiscUtils.deepMerge(e, raceTemplate);
 
-      // Copy any more specific blueprint data over the top and assign the entity
+      // Override with any more specific blueprint data
       MiscUtils.deepMerge(e, blueprint);
+
+      // Figure out the health / kron / endurance values
+      if (e.impact) {
+        e.health = e.health || (e.impact.tgh * e.healthMultiplier) || 0;
+        e.kron = e.kron || (e.impact.mag * e.kronMultiplier) || 0;
+        e.endurance = e.endurance || (e.impact.tgh * e.enduranceMultiplier) || 0;
+      }
+
+      // Assign the entity
       backend.world.entities[backend.world._nextEntity] = e;
       e.blueprint = blueprintName;
       e.entityID = backend.world._nextEntity;

@@ -11,8 +11,7 @@
         "cha":3,
         "tgh":3,
         "pointsRemaining":10
-      },
-      "health":6
+      }
     }
   },
   "startingArea":"start"
