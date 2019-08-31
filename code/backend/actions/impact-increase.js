@@ -16,6 +16,30 @@ define(["logger"], function (logger) {
       changes.entities = [];
       changes.entities[params.entity.entityID] = {};
       changes.entities[params.entity.entityID].impact = impact;
+
+      // Increase health / endurance values on a toughness bump
+      if (params.method === "tgh") {
+        var newHealth = params.entity.healthMultiplier + (params.entity.health || (impact.tgh * params.entity.healthMultiplier));
+        if ((typeof newHealth === "number") && (newHealth !== NaN)) {
+          params.entity.health = newHealth;
+          changes.entities[params.entity.entityID].health = newHealth;
+        }
+
+        var newEndurance = params.entity.enduranceMultiplier + (params.entity.endurance || (impact.tgh * params.entity.enduranceMultiplier));
+        if ((typeof newEndurance === "number") && (newEndurance !== NaN)) {
+          params.entity.endurance = newEndurance;
+          changes.entities[params.entity.entityID].endurance = newEndurance;
+        }
+      }
+
+      // Increase kron value on a magic bump
+      else if (params.method === "mag") {
+        var newKron = params.entity.kronMultiplier + (params.entity.kron || (impact.mag * params.entity.kronMultiplier));
+        if ((typeof newKron === "number") && (newKron !== NaN)) {
+          params.entity.kron = newKron;
+          changes.entities[params.entity.entityID].kron = newKron;
+        }
+      }
     }
 
     return changes;
