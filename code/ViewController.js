@@ -81,11 +81,11 @@ define(["logger", "MiscUtils"], function (logger, MiscUtils) {
       // IMPACT points distribution
       if (ViewController.character.impact.pointsRemaining) {
         document.getElementById("impact-stat-pointsRemaining").style.color = "#118811";
-        MiscUtils.toggleSelectorClass(".button-impact-increase", "hidden", false);
+        MiscUtils.toggleSelectorClass('[data-action-game-category="impact-increase"]', "hidden", false);
       }
       else {
         document.getElementById("impact-stat-pointsRemaining").style.color = "red";
-        MiscUtils.toggleSelectorClass(".button-impact-increase", "hidden", true);
+        MiscUtils.toggleSelectorClass('[data-action-game-category="impact-increase"]', "hidden", true);
       }
     }
 
