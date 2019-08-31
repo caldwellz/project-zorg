@@ -24,13 +24,12 @@ define(["logger", "MiscUtils", "./actions/categories"], function (logger, MiscUt
           return category[params.method](backend, params);
         else {
           logger.warn("actionDispatcher.submitAction(): Action method not found");
-          logger.debug(category);
-          logger.debug(params.method);
+          logger.debug(params);
         }
       }
       else {
         logger.warn("actionDispatcher.submitAction(): Action category not found");
-        logger.debug(params.category);
+        logger.debug(params);
       }
     }
     else

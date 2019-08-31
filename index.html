@@ -44,13 +44,48 @@
             <a data-action-toggle-selector-class="hidden" href="#char-impact">IMPACT</a>
             <table class="hidden" id="char-impact">
               <tbody>
-                <tr><td>&#x1F9E0;</td><td>Intelligence:</td><td id="impact-stat-int"></td><td><button type="button" class="hidden button-impact-increase" id="impact-increase-int">+</button></td></tr>
-                <tr><td>&#x1F5F2;</td><td>Magic:</td><td id="impact-stat-mag"></td><td><button type="button" class="hidden button-impact-increase" id="impact-increase-mag">+</button></td></tr>
-                <tr><td>&#x1F441;</td><td>Perception:</td><td id="impact-stat-per"></td><td><button type="button" class="hidden button-impact-increase" id="impact-increase-per">+</button></td></tr>
-                <tr><td>&#x1F3C3;</td><td>Agility:</td><td id="impact-stat-agi"></td><td><button type="button" class="hidden button-impact-increase" id="impact-increase-agi">+</button></td></tr>
-                <tr><td>&#x1F91D;</td><td>Charisma:</td><td id="impact-stat-cha"></td><td><button type="button" class="hidden button-impact-increase" id="impact-increase-cha">+</button></td></tr>
-                <tr><td>&#x1F91C;</td><td>Toughness:</td><td id="impact-stat-tgh"></td><td><button type="button" class="hidden button-impact-increase" id="impact-increase-tgh">+</button></td></tr>
-                <tr class="bold-text"><td></td><td>Points left:</td><td id="impact-stat-pointsRemaining"></td><td></td>
+                <tr>
+                  <td>&#x1F9E0;</td>
+                  <td>Intelligence:</td>
+                  <td id="impact-stat-int"></td>
+                  <td><button type="button" class="hidden button-impact-increase" data-action-game-category="impact-increase" data-action-game-method="int">+</button></td>
+                </tr>
+                <tr>
+                  <td>&#x1F5F2;</td>
+                  <td>Magic:</td>
+                  <td id="impact-stat-mag"></td>
+                  <td><button type="button" class="hidden button-impact-increase" data-action-game-category="impact-increase" data-action-game-method="mag">+</button></td>
+                </tr>
+                <tr>
+                  <td>&#x1F441;</td>
+                  <td>Perception:</td>
+                  <td id="impact-stat-per"></td>
+                  <td><button type="button" class="hidden button-impact-increase" data-action-game-category="impact-increase" data-action-game-method="per">+</button></td>
+                </tr>
+                <tr>
+                  <td>&#x1F3C3;</td>
+                  <td>Agility:</td>
+                  <td id="impact-stat-agi"></td>
+                  <td><button type="button" class="hidden button-impact-increase" data-action-game-category="impact-increase" data-action-game-method="agi">+</button></td>
+                </tr>
+                <tr>
+                  <td>&#x1F91D;</td>
+                  <td>Charisma:</td>
+                  <td id="impact-stat-cha"></td>
+                  <td><button type="button" class="hidden button-impact-increase" data-action-game-category="impact-increase" data-action-game-method="cha">+</button></td>
+                </tr>
+                <tr>
+                  <td>&#x1F91C;</td>
+                  <td>Toughness:</td>
+                  <td id="impact-stat-tgh"></td>
+                  <td><button type="button" class="hidden button-impact-increase" data-action-game-category="impact-increase" data-action-game-method="tgh">+</button></td>
+                </tr>
+                <tr class="bold-text">
+                  <td></td>
+                  <td>Points left:</td>
+                  <td id="impact-stat-pointsRemaining"></td>
+                  <td></td>
+                </tr>
               </tbody>
             </table>
           </li>
@@ -85,38 +120,38 @@
       <table>
         <tbody>
           <tr>
-            <td><button type="button">&#x21D6;</button></td>
-            <td><button type="button">&#x21D1;</button></td>
-            <td><button type="button">&#x21D7;</button></td>
+            <td><button type="button" data-action-game-category="move" data-action-game-method="northWest">&#x21D6;</button></td>
+            <td><button type="button" data-action-game-category="move" data-action-game-method="north">&#x21D1;</button></td>
+            <td><button type="button" data-action-game-category="move" data-action-game-method="northEast">&#x21D7;</button></td>
           </tr>
           <tr>
-            <td><button type="button">&#x21D0;</button></td>
+            <td><button type="button" data-action-game-category="move" data-action-game-method="west">&#x21D0;</button></td>
             <td>&#x1F9ED;</td>
-            <td><button type="button">&#x21D2;</button></td>
+            <td><button type="button" data-action-game-category="move" data-action-game-method="east">&#x21D2;</button></td>
           </tr>
           <tr>
-            <td><button type="button">&#x21D9;</button></td>
-            <td><button type="button">&#x21D3;</button></td>
-            <td><button type="button">&#x21D8;</button></td>
+            <td><button type="button" data-action-game-category="move" data-action-game-method="southWest">&#x21D9;</button></td>
+            <td><button type="button" data-action-game-category="move" data-action-game-method="south">&#x21D3;</button></td>
+            <td><button type="button" data-action-game-category="move" data-action-game-method="southEast">&#x21D8;</button></td>
           </tr>
         </tbody>
       </table>
       <table>
         <tbody>
           <tr>
-            <td><button type="button">&#x21BA;</button></td>
-            <td><button type="button">&#x25B2;</button></td>
-            <td><button type="button">&#x21BB;</button></td>
+            <td><button type="button" data-action-game-category="rotate" data-action-game-method="counterClockwise">&#x21B6;</button></td>
+            <td><button type="button" data-action-game-category="move" data-action-game-method="forward">&#x25B2;</button></td>
+            <td><button type="button" data-action-game-category="rotate" data-action-game-method="clockwise">&#x21B7;</button></td>
           </tr>
           <tr>
-            <td><button type="button">&#x25C0;</button></td>
-            <td><button type="button" data-action-game-category="test" data-action-game-method="testMethod">&#x25CE;</button></td>
-            <td><button type="button">&#x25B6;</button></td>
+            <td><button type="button" data-action-game-category="move" data-action-game-method="left">&#x25C0;</button></td>
+            <td>&#x25CE;</td>
+            <td><button type="button" data-action-game-category="move" data-action-game-method="right">&#x25B6;</button></td>
           </tr>
           <tr>
-            <td><button type="button">&#x20D4;</button></td>
-            <td><button type="button">&#x25BC;</button></td>
-            <td><button type="button">&#x20D5;</button></td>
+            <td><button type="button" data-action-game-category="rotate" data-action-game-method="counterClockwiseQuarter">&#x21BA;</button></td>
+            <td><button type="button" data-action-game-category="move" data-action-game-method="backward">&#x25BC;</button></td>
+            <td><button type="button" data-action-game-category="rotate" data-action-game-method="clockwiseQuarter">&#x21BB;</button></td>
           </tr>
         </tbody>
       </table>
