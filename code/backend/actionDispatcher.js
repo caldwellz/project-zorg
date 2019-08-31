@@ -18,7 +18,9 @@ define(["logger", "MiscUtils", "./actions/categories"], function (logger, MiscUt
 
       if (params.category && actionCategories[params.category]) {
         var category = actionCategories[params.category];
-        if (params.method && (typeof category[params.method] === "function"))
+        if (typeof category === "function")
+          return category(backend, params);
+        else if (params.method && (typeof category === "object") && (typeof category[params.method] === "function"))
           return category[params.method](backend, params);
         else {
           logger.warn("actionDispatcher.submitAction(): Action method not found");

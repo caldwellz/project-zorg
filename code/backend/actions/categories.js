@@ -7,9 +7,7 @@
 define(["logger"], function (logger) {
   var categories = {};
 
-  categories.test = {
-    testMethod: function (backend, params) { console.log(params); return {}; }
-  };
+  categories.test = function (backend, params) { console.log(params); return {}; };
 
   return categories;
 });
