@@ -4,10 +4,23 @@
 
 "use strict";
 
-define(["logger"], function (logger) {
+// The main list of action categories (which should also match their respective JS filenames)
+var actionCategories = [
+  "impact-increase"
+];
+
+var depends = [];
+for (var i = 0; i < actionCategories.length; ++i) {
+  depends[i] = "./" + actionCategories[i];
+}
+
+define(depends, function () {
   var categories = {};
 
-  categories.test = function (backend, params) { console.log(params); return {}; };
+  for (var i = 0; i < arguments.length; ++i) {
+    if (actionCategories[i])
+      categories[actionCategories[i]] = arguments[i];
+  }
 
   return categories;
 });
