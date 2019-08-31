@@ -7,9 +7,3 @@
   border: 2px solid black;
   padding: 3px;
 }
-
-@media only screen and (min-width: 30em) {
-  #logbox {
-    height: 40vh;
-  }
-}
