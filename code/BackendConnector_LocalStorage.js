@@ -52,7 +52,7 @@ define(["logger", "BackendConnector", "backend/backend"], function (logger, Back
         // Get the starting area
         if (backend.data.startingArea) {
           backend.loadArea(backend.data.startingArea, function (area) {
-            connector.world.currentArea = area;
+            connector.world.currentArea = area.tag;
             connector.storage.setItem(connector.gameKey, JSON.stringify(connector.world));
             logger.debug("BackendConnector_LocalStorage.fetchWorld(): Created and saved new world to localStorage key '" + connector.gameKey + "'");
             if (typeof callback === "function")

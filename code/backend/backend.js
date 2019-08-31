@@ -129,9 +129,13 @@ define(["logger", "resource-loader", "MiscUtils", "./actionDispatcher"], functio
                 if (eID) {
                   var entity = backend.world.entities[eID];
                   var positionData = area.entityLocations[blueprintName][i];
-                  entity.direction = positionData[0];
                   var x = positionData[1];
                   var y = positionData[2];
+
+                  entity.direction = positionData[0];
+                  entity.x = x;
+                  entity.y = y;
+                  entity.areaTag = areaTag;
 
                   area.map[x] = area.map[x] || [];
                   area.map[x][y] = area.map[x][y] || [];
