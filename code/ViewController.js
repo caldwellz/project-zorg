@@ -21,11 +21,32 @@ define(["logger", "MiscUtils"], function (logger, MiscUtils) {
   };
 
 
+  ViewController.submitCharacterAction = function (category, method) {
+    if (ViewController.connector && ViewController.world && ViewController.character) {
+      var params = {
+        "category": category,
+        "method": method,
+        "entity": ViewController.character
+      };
+
+      ViewController.connector.submitAction(params, function (updates) {
+        ViewController.update(updates);
+      });
+    }
+    else
+      logger.warn("ViewController.submitCharacterAction(): Please initialize ViewController first");
+  };
+
+
   ViewController.update = function (updates) {
-    // Determine which parts of the view need updating and call the respective functions
-    var charUpdates = updates.entities[ViewController.world.characterID];
-    if (charUpdates)
-      ViewController._updateCharacter(charUpdates);
+    if (typeof updates === "object") {
+      // Determine which parts of the view need updating and call the respective functions
+      if (updates.entities) {
+        var charUpdates = updates.entities[ViewController.world.characterID];
+        if (charUpdates)
+          ViewController._updateCharacter(charUpdates);
+      }
+    }
   };
 
 

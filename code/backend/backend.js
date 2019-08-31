@@ -4,7 +4,7 @@
 
 "use strict";
 
-define(["logger", "resource-loader", "MiscUtils"], function (logger, Loader, MiscUtils) {
+define(["logger", "resource-loader", "MiscUtils", "./actionDispatcher"], function (logger, Loader, MiscUtils, actionDispatcher) {
   var backend = {};
   backend.areaBasePath = "data/areas/";
   // TODO: Move files to an index list and load that first
@@ -151,11 +151,15 @@ define(["logger", "resource-loader", "MiscUtils"], function (logger, Loader, Mis
 
 
   backend.submitAction = function (params) {
-    if (backend.data) {
-      
+    if (backend.world) {
+      if (backend.data)
+        return actionDispatcher.submitAction(backend, params);
+      else
+        backend._loadDataFiles(backend.submitAction, params);
     }
-    else
-      backend._loadDataFiles(backend.submitAction, params);
+    else {
+      backend.newWorld(backend.submitAction, params);
+    }
   };
 
   return backend;

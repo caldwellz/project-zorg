@@ -81,6 +81,18 @@ define([], function () {
         }
       };
     }
+
+    //action-game-category
+    var query = document.querySelectorAll('[data-action-game-category]');
+    var ViewController = require("ViewController");
+    for (var i = 0; i < query.length; ++i) {
+      query[i].onclick = function () {
+        ViewController.submitCharacterAction(this.getAttribute("data-action-game-category"), this.getAttribute("data-action-game-method"));
+
+        if (this.nodeName === 'A')
+          return false;
+      };
+    }
   };
 
 

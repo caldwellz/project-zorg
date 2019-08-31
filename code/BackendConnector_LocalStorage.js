@@ -92,9 +92,9 @@ define(["logger", "BackendConnector", "backend/backend"], function (logger, Back
   };
 
 
-  BackendConnector_LocalStorage.prototype.submitAction = function (category, action, callback) {
+  BackendConnector_LocalStorage.prototype.submitAction = function (params, callback) {
     if (this.world) {
-      var updates = backend.submitAction(category, action);
+      var updates = backend.submitAction(params);
       // Don't need to merge changes first, because of the shared world
       this.storage.setItem(this.gameKey, JSON.stringify(this.world));
 
@@ -105,7 +105,7 @@ define(["logger", "BackendConnector", "backend/backend"], function (logger, Back
       var ctx = this;
       this.fetchWorld(function () {
         if (ctx.world)
-          ctx.submitAction(category, action, callback);
+          ctx.submitAction(params, callback);
         else
           logger.error("BackendConnector_LocalStorage.submitAction(): World could not be found or fetched");
       });
