@@ -4,7 +4,7 @@
 
 "use strict";
 
-define([], function () {
+define(["logger"], function (logger) {
   var MiscUtils = {};
 
   // classList.contains polyfill for older browsers, courtesy of SO

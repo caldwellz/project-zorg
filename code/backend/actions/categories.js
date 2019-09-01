@@ -6,6 +6,7 @@
 
 // The main list of action categories (which should also match their respective JS filenames)
 var actionCategories = [
+  "get-details",
   "impact-increase"
 ];
 

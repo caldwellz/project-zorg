@@ -46,6 +46,8 @@ define(["logger", "MiscUtils"], function (logger, MiscUtils) {
         if (charUpdates)
           ViewController._updateCharacter(charUpdates);
       }
+      if (updates.description)
+        logger.push(updates.description);
     }
   };
 
