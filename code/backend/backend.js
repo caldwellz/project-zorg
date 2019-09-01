@@ -125,7 +125,20 @@ define(["logger", "resource-loader", "MiscUtils", "./actionDispatcher"], functio
             // Convert entity locations list to actual entities and map data
             for (var blueprintName in area.entityLocations) {
               for (var i = 0; i < area.entityLocations[blueprintName].length; ++i) {
-                var eID = backend.createEntityFromBlueprint(blueprintName);
+                // Make sure we don't create a duplicate player object if there is one
+                if (blueprintName === "character") {
+                  // Only emplace it at one map coordinate (map should only ever list one player character, but just to be safe)
+                  if (i >= 1)
+                    break;
+
+                  if (!(backend.world.characterID >= 0))
+                    backend.world.characterID = backend.createEntityFromBlueprint(blueprintName);
+                  var eID = backend.world.characterID;
+                }
+                else
+                  var eID = backend.createEntityFromBlueprint(blueprintName);
+
+                // Fill in the entity's location details
                 if (eID) {
                   var entity = backend.world.entities[eID];
                   var positionData = area.entityLocations[blueprintName][i];
