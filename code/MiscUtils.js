@@ -129,5 +129,33 @@ define(["logger"], function (logger) {
     }
   }
 
+
+  MiscUtils.directionIntToName = function (direction) {
+    if (direction >= 8)
+      direction = direction % 8;
+
+    switch (direction) {
+      case 0:
+        return "NE";
+      case 1:
+        return "East";
+      case 2:
+        return "SE";
+      case 3:
+        return "South";
+      case 4:
+        return "SW";
+      case 5:
+        return "West";
+      case 6:
+        return "NW";
+      case 7:
+        return "North";
+      default:
+        logger.warn("MiscUtils.directionIntToName(): Invalid direction");
+        return "";
+    }
+  };
+
   return MiscUtils;
 });
